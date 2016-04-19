@@ -113,6 +113,54 @@ exposures: {
         tables:      "raw"
     }
 
+    deepDiff_config: {
+        template:      "config/deepDiff.py" 
+        python:        "lsst.pex.config.Config" 
+        persistable:      "Config" 
+        storage:    "ConfigStorage" 
+        level:         "Skytile"
+        tables:        "raw"
+    }
+    deepDiff_metadata: {
+        template:      "deepDiff/%(runId)s/%(object)s/%(date)s/%(filter)s/metadata-%(visit)d-%(ccd)02d.boost" 
+        python:        "lsst.daf.base.PropertySet" 
+        persistable:        "PropertySet" 
+        storage:    "BoostStorage" 
+        level:         "Skytile"
+        tables:        "raw"
+    }
+    deepDiff_differenceExp: {
+        template:      "deepDiff/%(runId)s/%(object)s/%(date)s/%(filter)s/diffexp-%(visit)d-%(ccd)02d.fits" 
+        python:        "lsst.afw.image.ExposureF" 
+        persistable:        "ExposureF" 
+        storage:    "FitsStorage" 
+        level:         "Skytile"
+        tables:        "raw"
+    }
+    deepDiff_matchedExp: {
+        template:      "deepDiff/%(runId)s/%(object)s/%(date)s/%(filter)s/matchexp-%(visit)d-%(ccd)02d.fits" 
+        python:        "lsst.afw.image.ExposureF" 
+        persistable:        "ExposureF" 
+        storage:    "FitsStorage" 
+        level:         "Skytile"
+        tables:        "raw"
+    }
+    deepDiff_diaSrc_schema: {
+        template:      "schema/deepDiff_diaSrc.fits" 
+        python:        "lsst.afw.table.SourceCatalog" 
+        persistable:        "SourceCatalog" 
+        storage:    "FitsCatalogStorage" 
+        level:         "Skytile"
+        tables:        "raw"
+    }
+    deepDiff_kernelSrc: {
+        template:      "deepDiff/%(runId)s/%(object)s/%(date)s/%(filter)s/kernelSrc-%(visit)d-%(ccd)02d.fits" 
+        python:        "lsst.afw.table.SourceCatalog" 
+        persistable:        "SourceCatalog" 
+        storage:    "FitsCatalogStorage" 
+        level:         "Skytile"
+        tables:        "raw"
+    }
 }
 
 calibrations: {
@@ -289,8 +337,8 @@ datasets: {
         python:        "lsst.afw.math.BackgroundList"
         persistable:   "PurePythonClass"
         storage:       "FitsCatalogStorage"
-        tables:        raw
-        tables:        raw_skyTile
+        level:         "Skytile"
+        tables:        "raw"
     }
     deepCoadd_modelfits: {
         template:      "deepCoadd-results/%(filter)s/%(tract)d/%(patch)s/modelfits-%(filter)s-%(tract)d-%(patch)s.fits"
@@ -748,6 +796,16 @@ datasets: {
         python:        "lsst.pipe.tasks.multiBand.MultiBandConfig"
         persistable:   "Config"
         storage:       "ConfigStorage"
+    }
+
+    # image differencing
+    deepDiff_diaSrc: {
+        template:      "deepDiff/%(runId)s/%(object)s/%(date)s/%(filter)s/diaSrc-%(visit)d-%(ccd)02d.fits" 
+        python:        "lsst.afw.table.SourceCatalog" 
+        persistable:        "SourceCatalog" 
+        storage:    "FitsCatalogStorage" 
+        tables:        raw
+   #     tables:        raw_skyTile
     }
 
 }

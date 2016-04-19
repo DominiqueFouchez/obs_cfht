@@ -134,8 +134,10 @@ exposures: {
         python:        "lsst.afw.image.ExposureF" 
         persistable:        "ExposureF" 
         storage:    "FitsStorage" 
-        level:         "Skytile"
+        level:         "Ccd"
         tables:        "raw"
+	columns:       "visit"
+	columns:       "ccd"
     }
     deepDiff_matchedExp: {
         template:      "deepDiff/%(runId)s/%(object)s/%(date)s/%(filter)s/matchexp-%(visit)d-%(ccd)02d.fits" 
